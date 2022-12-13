@@ -1,0 +1,8 @@
+RewriteEngine On 
+RewriteBase / 
+Redirect /src/users.json  /index.php
+
+
+
+
+
