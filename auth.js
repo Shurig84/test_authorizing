@@ -1,61 +1,67 @@
-$('.auth_btn').click(function (e) {
-  e.preventDefault()
-  rezet_mes()
-  let login = $('input[name="login"]').val(),
-    password = $('input[name="password"]').val()
-  $.ajax({
-    url: '/src/authoriz.php',
-    type: 'POST',
-    datatype: 'json',
-    data: {
-      login: login,
-      password: password,
-      action: 'auth',
-    },
-    success(data) {
-      check(data)
-    },
+$(document).ready(function () {
+  $('.auth_btn').click(function (e) {
+    e.preventDefault()
+    rezet_mes()
+    let login = $('input[name="login"]').val(),
+      password = $('input[name="password"]').val()
+    $.ajax({
+      url: '/src/authoriz.php',
+      type: 'POST',
+      datatype: 'json',
+      data: {
+        login: login,
+        password: password,
+        action: 'auth',
+      },
+      success(data) {
+        check(data)
+      },
+    })
   })
 })
 
-$('.update_btn').click(function (e) {
-  e.preventDefault()
-  rezet_mes()
-  let login = $('input[name="login"]').val(),
-    password = $('input[name="password"]').val(),
-    new_password = $('input[name="new_password"]').val()
-  $.ajax({
-    url: '/src/authoriz.php',
-    type: 'POST',
-    datatype: 'json',
-    data: {
-      login: login,
-      password: password,
-      new_password: new_password,
-      action: 'update',
-    },
-    success(data) {
-      check(data)
-    },
+$(document).ready(function () {
+  $('.update_btn').click(function (e) {
+    e.preventDefault()
+    rezet_mes()
+    let login = $('input[name="login"]').val(),
+      password = $('input[name="password"]').val(),
+      new_password = $('input[name="new_password"]').val()
+    $.ajax({
+      url: '/src/authoriz.php',
+      type: 'POST',
+      datatype: 'json',
+      data: {
+        login: login,
+        password: password,
+        new_password: new_password,
+        action: 'update',
+      },
+      success(data) {
+        check(data)
+      },
+    })
   })
 })
-$('.del_btn').click(function (e) {
-  e.preventDefault()
-  rezet_mes()
-  let login = $('input[name="login"]').val(),
-    password = $('input[name="password"]').val()
-  $.ajax({
-    url: '/src/authoriz.php',
-    type: 'POST',
-    datatype: 'json',
-    data: {
-      login: login,
-      password: password,
-      action: 'del',
-    },
-    success(data) {
-      check(data)
-    },
+$(document).ready(function () {
+  $('.del_btn').click(function (e) {
+    e.preventDefault()
+    rezet_mes()
+    let login = $('input[name="login"]').val(),
+      password = $('input[name="password"]').val()
+    $.ajax({
+      url: '/src/authoriz.php',
+      type: 'POST',
+      datatype: 'json',
+      data: {
+        login: login,
+        password: password,
+        action: 'del',
+      },
+      success(data) {
+        check(data)
+      },
+    })
   })
 })
 
@@ -76,6 +82,7 @@ function check(data) {
   } else if (!data.message) {
     document.location.href = 'reg.php'
   } else if (data.login && data.password) {
+    document.cookie = data.name
     document.location.href = 'start.php'
   } else if (data.new_password) {
     $('.new_password_err').text(data.message)

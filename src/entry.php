@@ -30,6 +30,8 @@ if(isset($db)&&Crud_db::check_email($user,$db)){
   Crud_db::add_user($s_user,$db);
   $_SESSION['message']='Вы зарегистрированы!';
   $_SESSION['name']=$user->name;
+  $_SESSION['email']=$user->email;
+  $_SESSION['login']=$user->login;
   }
 echo json_encode($valid);
 ?>

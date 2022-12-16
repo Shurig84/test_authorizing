@@ -59,10 +59,16 @@ if(isset($db)){
         }
     
         $user=Crud_db::get_user($db,$user);
-        $_SESSION['name']=$user->name;
+        $name = $user->name;
+        $email = $user->email;
+        $login = $user->login;
+        $_SESSION['name']=$name;
+        $_SESSION['email']=$email;
+        $_SESSION['login']=$login;
         $response = [
-        "login"=>true,
-        "password"=>true,
+          "name"=> $name,
+          "login"=> true,
+          "password"=> true,
          ];
         echo json_encode($response);
         die();
