@@ -16,7 +16,7 @@ if(isset($db)){
   { 
     if(Crud_db::check_password($db,$user)){
     
-        if($_POST['action']==='del')
+        if($_POST['action']==='del')  //обработка запроса на удаление профиля
         {
         Crud_db::del_user($db,$user);
         $response = [
@@ -29,7 +29,7 @@ if(isset($db)){
         }
 
     
-        if($_POST['action']==='update')
+        if($_POST['action']==='update')   //обработка запроса на изменение пароля
         {
            $new_password = trim($_POST['new_password']);
         
@@ -45,7 +45,7 @@ if(isset($db)){
             die();
             }
         
-            else 
+            else      
             {
              $response = [
             "login"=>true,
@@ -58,7 +58,7 @@ if(isset($db)){
             }
         }
     
-        $user=Crud_db::get_user($db,$user);
+        $user=Crud_db::get_user($db,$user);  //обработка ajax запроса на авторизацию профиля
         $name = $user->name;
         $email = $user->email;
         $login = $user->login;
@@ -74,7 +74,7 @@ if(isset($db)){
         die();
     }
     else  
-    {
+    {       //неправильный ввод пароля
         
          $response = [
         "login"=>true,
@@ -86,8 +86,8 @@ if(isset($db)){
     }
   }
   else
-  {
-    $response = [
+  {          //неправильный ввод логина
+    $response = [     
         "login"=>false,
         "password"=>false,
         "message"=>'неверно введен логин' 
@@ -100,7 +100,7 @@ if(isset($db)){
 
 
 else 
-{
+{                  //база данных не имеет записей
     $response = [
         "login"=>false,
         "password"=>false,

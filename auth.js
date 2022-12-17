@@ -5,6 +5,7 @@ $(document).ready(function () {
     let login = $('input[name="login"]').val(),
       password = $('input[name="password"]').val()
     $.ajax({
+      //отравка запроса на авторизацию
       url: '/src/authoriz.php',
       type: 'POST',
       datatype: 'json',
@@ -28,6 +29,7 @@ $(document).ready(function () {
       password = $('input[name="password"]').val(),
       new_password = $('input[name="new_password"]').val()
     $.ajax({
+      //отравка запроса на изменение пароля
       url: '/src/authoriz.php',
       type: 'POST',
       datatype: 'json',
@@ -50,6 +52,7 @@ $(document).ready(function () {
     let login = $('input[name="login"]').val(),
       password = $('input[name="password"]').val()
     $.ajax({
+      //отравка запроса на удаление профиля
       url: '/src/authoriz.php',
       type: 'POST',
       datatype: 'json',
@@ -66,6 +69,7 @@ $(document).ready(function () {
 })
 
 function rezet_mes() {
+  // очистка полей с ошибками
   $('.login_err').text('')
   $('.password_err').text('')
   $('.new_password_err').text('')
@@ -74,6 +78,7 @@ function rezet_mes() {
 }
 
 function check(data) {
+  //обработчик полученных данных с сервера в формате json
   data = JSON.parse(data)
   if (data.update_mes) {
     $('.is_update_mess').text(data.update_mes)
@@ -82,7 +87,6 @@ function check(data) {
   } else if (!data.message) {
     document.location.href = 'reg.php'
   } else if (data.login && data.password) {
-    document.cookie = data.name
     document.location.href = 'start.php'
   } else if (data.new_password) {
     $('.new_password_err').text(data.message)

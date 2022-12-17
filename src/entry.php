@@ -15,18 +15,18 @@ $user = new User($name,$email,$login,md5($password.$login),md5($confirm_password
 $s_user = serialize($user);
 $valid = Crud_db::reg_valid($user);
 
-  if(isset($db)&&Crud_db::check_login($user,$db)){
+  if(isset($db)&&Crud_db::check_login($user,$db)){   //если такой логин уже существует в базе данных
   $valid["login"]=false;
   $valid["login_mess"]='такой логин уже существует';
   $valid["all_valid"]=false;
 }
-if(isset($db)&&Crud_db::check_email($user,$db)){
+  if(isset($db)&&Crud_db::check_email($user,$db)){   //если тако email уже существует в базе данных
   $valid["email"]=false;
   $valid["email_mess"]='такой email уже существует';
   $valid["all_valid"]=false;
 }
 
-  if($valid["all_valid"]){
+  if($valid["all_valid"]){               //валидация прошла успешно , создание нового профиля в базе данных    
   Crud_db::add_user($s_user,$db);
   $_SESSION['message']='Вы зарегистрированы!';
   $_SESSION['name']=$user->name;

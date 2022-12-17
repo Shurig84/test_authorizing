@@ -1,5 +1,5 @@
 <?php
-class User{
+class User{   
     public $name,$email,$login,$password,$confirm_password;
     function __construct($name,$email,$login,$password,$confirm_password)
     {

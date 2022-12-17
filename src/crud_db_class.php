@@ -1,7 +1,7 @@
 <?php
- class Crud_db{
+ class Crud_db{  //статический класс для работы с БД и валидации полей ввода данных профиля
 
-static function add_user($s_user,$db){
+static function add_user($s_user,$db){   // метод для добавления пользователя в БД
     
     if(isset($db)){
         array_push($db,$s_user);
@@ -12,7 +12,7 @@ static function add_user($s_user,$db){
     }
 }
 
-static function get_user($db,$user) 
+static function get_user($db,$user)   // метод для получения пользователя из БД
 {
     
  foreach($db as $value)
@@ -24,7 +24,7 @@ static function get_user($db,$user)
      return false;
 }
 
-static function update_user($db,$user,$new_password){
+static function update_user($db,$user,$new_password){     // метод для изменения пароля профиля
     $new_password=md5($new_password.$user->login);
     foreach($db as $key=>$value)
     {
@@ -38,10 +38,9 @@ static function update_user($db,$user,$new_password){
         break;}
     }
     file_put_contents('users.json',json_encode($db,true));
-    
 }
 
-static function del_user($db,$user){
+static function del_user($db,$user){           // метод для удаления профиля
 
     foreach($db as $key=>$value)
     {
@@ -59,14 +58,11 @@ static function del_user($db,$user){
             file_put_contents('users.json',json_encode($db,true));
             break;
            }
-        
         }
     }
-    
-    
 }
 
-static function check_email($user,$db) 
+static function check_email($user,$db)   //проверка email на наличие в БД
 {
  foreach($db as $value)
     {
@@ -77,7 +73,7 @@ static function check_email($user,$db)
      return false;
 }
 
-static function check_login($user,$db) 
+static function check_login($user,$db)   //проверка логина на наличие в БД
 {
  foreach($db as $value)
     {
@@ -88,9 +84,8 @@ static function check_login($user,$db)
      return false;
 }
 
-static function check_password($db,$user) 
+static function check_password($db,$user)   //проверка пароля на наличие в БД
 {
-    
  foreach($db as $value)
     {
         $v = unserialize($value);
@@ -100,14 +95,14 @@ static function check_password($db,$user)
      return false;
 }
 
-static function is_valid_pass($password){
+static function is_valid_pass($password){        //метод для валидации пароля 
     $res = preg_match('/^((?=.*[0-9])(?=.*[a-zа-яA-ZА-Я])[\w]{6,30})$/u',$password);
     if($res) {
        return true;}
     return false;
   } 
 
-static function reg_valid($user){
+static function reg_valid($user){       //метод для валидации данных полей регистрируемого пользователя
     
   $is_name = preg_match( '/^[A-Za-zА-Яа-я]{2,20}$/u',$user->name);
   $is_email = filter_var($user->email, FILTER_VALIDATE_EMAIL);
@@ -116,6 +111,7 @@ static function reg_valid($user){
   $is_confirm_password = self::is_valid_pass($_POST['confirm_password'])
   &&$user->password===$user->confirm_password;
   $is_all_valid = $is_name&&$is_email&&$is_login&&$is_password&&$is_confirm_password;
+  
   $resp = [
      "name"=>$is_name,
      "email"=>$is_email,

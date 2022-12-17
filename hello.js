@@ -3,6 +3,7 @@ $(document).ready(function () {
   $('.user_email').text('')
   $('.user_login').text('')
   $.ajax({
+    //запрос на получение данных аторизированного пользователя и вывод на страницу
     url: '/src/hello.php',
     type: 'POST',
     datatype: 'json',

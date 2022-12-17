@@ -1,4 +1,4 @@
-<?php
+<?php  //выход из сессии 
 session_start();
 unset($_SESSION['name']);
 unset($_SESSION['login']);

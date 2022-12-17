@@ -12,6 +12,7 @@ $('.reg_btn').click(function (e) {
     confirm_password = $('input[name="confirm_password"]').val()
 
   $.ajax({
+    //отравка запроса на регистрацию профиля
     url: '/src/entry.php',
     type: 'POST',
     datatype: 'json',
